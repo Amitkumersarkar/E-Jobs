@@ -1,20 +1,47 @@
 import Lottie from "lottie-react";
 import signUpAnimationData from "../assets/Lottie/Login Leady.json";
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
 
 const SignUp = () => {
+    // state declaration
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+    const [password, setPassword] = useState("");
+    //declared event handler or password handling
+    const handlePasswordChange = (e) => {
+        const value = e.target.value;
+        setPassword(value);
+
+        // conditions
+        if (value.length < 6) {
+            setError("Password must be at least 6 characters long.");
+            setSuccess("");
+        } else {
+            setError("");
+            setSuccess("password length is valid");
+        }
+    }
     const handleSignIn = (e) => {
         e.preventDefault();
+        setSuccess("");
+        setError("");
+
         const form = e.target;
         const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(name, email, password)
-        form.reset();
 
         // password validation
+        if (password.length < 6) {
+            setError("Password must be at least 6 characters long .");
+            return;
+        }
 
-
+        console.log("User Info :", name, email, password)
+        form.reset();
+        setSuccess("Account created successfully")
+        setPassword("");
     }
     return (
         <div className="hero bg-base-200 min-h-screen">
@@ -57,9 +84,15 @@ const SignUp = () => {
                                 type="password"
                                 className="input input-bordered w-full"
                                 placeholder="Password"
+                                value={password}
+                                onChange={handlePasswordChange}
                                 required
                             />
-
+                            {/* declared error and success message */}
+                            {error && <p className="text-red-500 text-sm">{error}</p>}
+                            {!error && password && (
+                                <p className="text-green-500 text-sm">{success}</p>
+                            )}
                             <button className="btn btn-primary w-full mt-4">Sign Up</button>
                         </fieldset>
                         <p className="text-center mt-5">Don't have an accounts ? <span className="text-cyan-500 font-bold"> <NavLink to='/sign-up'>SignUp</NavLink></span></p>
