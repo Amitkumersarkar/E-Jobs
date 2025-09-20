@@ -123,7 +123,7 @@ const SignUp = () => {
                                     onClick={() => setShowPassword(!showPassword)}
                                     className="absolute inset-y-0 right-3 flex items-center text-gray-500"
                                 >
-                                    {showPassword ? <FiEyeOff /> : <FiEye />}
+                                    {showPassword ? <FiEyeOff className="text-xl" /> : <FiEye className="text-xl" />}
                                 </button>
                             </div>
 
@@ -159,7 +159,7 @@ const SignUp = () => {
                         </fieldset>
 
                         <p className="text-center mt-5">
-                            Already have an account?{" "}
+                            Already have an account.?{" "}
                             <span className="text-cyan-500 font-bold">
                                 <NavLink to="/sign-in">Sign In</NavLink>
                             </span>
