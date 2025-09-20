@@ -2,10 +2,10 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
     const links = <>
-        <li><a>Item 1</a></li>
-        <li><a>Item 3</a></li>
-        <li><a>Item 3</a></li>
-        <li><a>Item 3</a></li>
+        <li><a>Home</a></li>
+        <li><a>About</a></li>
+        <li><a>Jobs</a></li>
+        <li><a>Contact</a></li>
     </>
     return (
         <div className="navbar bg-base-100 shadow-sm">
