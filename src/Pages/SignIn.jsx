@@ -1,8 +1,9 @@
 import Lottie from "lottie-react";
 import signUpAnimationData from "../assets/Lottie/Login Leady.json";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import AuthContext from "../Context/AuthContext";
 
 const SignUp = () => {
     const [password, setPassword] = useState("");
@@ -10,8 +11,8 @@ const SignUp = () => {
     const [success, setSuccess] = useState("");
     const [strength, setStrength] = useState({ label: "", color: "" });
     const [showPassword, setShowPassword] = useState(false);
-
-    // password rules
+    const { createUser } = useContext(AuthContext);
+    // password validation
     const validatePassword = (value) => {
         const rules = [];
 
@@ -24,7 +25,7 @@ const SignUp = () => {
         return rules;
     };
 
-    // check password strength
+    // check password strength or not
     const getPasswordStrength = (value) => {
         let passed = 0;
         if (value.length >= 6) passed++;
@@ -68,6 +69,15 @@ const SignUp = () => {
         setPassword("");
         setStrength({ label: "", color: "" });
         form.reset();
+
+        // show password validation
+        createUser(email, password)
+            .then(result => {
+                console.log(result.user)
+            })
+            .catch((error) => {
+                console.log(error.message);
+            })
     };
 
     return (
