@@ -99,7 +99,7 @@ const SignUp = () => {
                 <div className="card bg-base-100 w-full sm:w-3/4 md:w-2/3 lg:w-1/2 shadow-2xl">
                     <form onSubmit={handleSignIn} className="card-body">
                         <fieldset className="fieldset space-y-3">
-                            <label className="label">Full Name</label>
+                            <label className="label text-cyan-600 font-semibold">Full Name</label>
                             <input
                                 name="name"
                                 type="text"
@@ -108,7 +108,7 @@ const SignUp = () => {
                                 required
                             />
 
-                            <label className="label">Email</label>
+                            <label className="label text-cyan-600 font-semibold">Email</label>
                             <input
                                 name="email"
                                 type="email"
@@ -117,7 +117,7 @@ const SignUp = () => {
                                 required
                             />
 
-                            <label className="label">Password</label>
+                            <label className="label text-cyan-600 font-semibold">Password</label>
                             <div className="relative w-full">
                                 <input
                                     name="password"
@@ -171,7 +171,7 @@ const SignUp = () => {
                         <p className="text-center mt-5">
                             Already have an account.?{" "}
                             <span className="text-cyan-500 font-bold">
-                                <NavLink to="/sign-in">Sign In</NavLink>
+                                <NavLink to="/sign-up">Sign Up</NavLink>
                             </span>
                         </p>
                     </form>
