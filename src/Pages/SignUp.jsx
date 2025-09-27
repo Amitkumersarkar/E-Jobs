@@ -146,7 +146,7 @@ const SignUp = () => {
 
                         <p className="text-center mt-5">
                             Already have an account?{" "}
-                            <NavLink to="/sign-in" className="text-cyan-500 font-bold">Sign In</NavLink>
+                            <NavLink to="/sign-in" className="text-green-600 font-bold">Sign In</NavLink>
                         </p>
                     </form>
                 </div>
