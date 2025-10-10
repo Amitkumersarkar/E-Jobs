@@ -83,10 +83,9 @@ const SignIn = () => {
                                 </button>
                             </div>
 
-                            {/* Messages */}
                             {error && <p className="text-red-500 text-sm">{error}</p>}
                             {success && <p className="text-green-500 text-sm">{success}</p>}
-                            <div><a className="link link-hover">Forgot password?</a></div>
+                            <div><a className="link link-hover"><NavLink to='error'>Forgot password?</NavLink></a></div>
                             <button className="btn btn-primary w-full mt-4">Sign In</button>
                         </fieldset>
 

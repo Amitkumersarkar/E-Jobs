@@ -7,12 +7,13 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import SignIn from './Pages/SignIn'
 import SignUp from './Pages/SignUp'
 import AuthProvider from './Context/AuthProvider'
+import Error from './Pages/ErrorPage/Error'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayOut />,
-    errorElement: <h2>Pages not found</h2>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
