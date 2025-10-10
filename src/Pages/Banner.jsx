@@ -1,21 +1,30 @@
-import { motion, easeOut } from "motion/react"
-
+import { easeOut, motion } from "motion/react";
+import team1 from "../assets/images/peopleInOffice.jpg";
+import Team2 from "../assets/images/excited.jpg";
 const Banner = () => {
 
     return (
         <div className="hero bg-base-200 min-h-96">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="flex-1">
-                    <img
-                        src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
-                        className="max-w-sm rounded-lg shadow-2xl"
+                    <motion.img
+                        src={team1}
+                        animate={{ y: [50, 100, 50] }}
+                        transition={{ duration: 10, repeat: Infinity }}
+                        className="max-w-sm w-70 rounded-tl-[40px] rounded-br-[40px] border-l-[5px] border-b-[4px] border-l-cyan-600 shadow-2xl"
+                    />
+                    <motion.img
+                        src={Team2}
+                        animate={{ x: [100, 150, 100] }}
+                        transition={{ duration: 10, repeat: Infinity }}
+                        className="max-w-sm w-70 rounded-tl-[40px] rounded-br-[40px] border-l-[5px] border-b-[4px] border-l-cyan-600 shadow-2xl"
                     />
                 </div>
                 <div className="flex-1">
                     < motion.h1
                         animate={{ x: 50, color: ['green'] }}
                         transition={{ duration: 2, delay: 1, ease: easeOut, repeat: Infinity }}
-                        className="text-5xl font-bold">Latest Jobs For You!
+                        className="text-5xl font-bold"><span>Latest</span> Jobs For You!
                     </motion.h1>
                     <p className="py-6">
                         Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
