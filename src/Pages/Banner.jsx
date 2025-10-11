@@ -20,11 +20,10 @@ const Banner = () => {
                         className="max-w-sm w-70 rounded-tl-[40px] rounded-br-[40px] border-l-[5px] border-b-[4px] border-l-cyan-600 shadow-2xl"
                     />
                 </div>
-
                 <div className="flex-1">
                     <motion.h1
-                        animate={{ x: 50, color: ["#0ea5e9", "#14b8a6", "#0ea5e9"] }}
-                        transition={{ duration: 2, delay: 1, ease: "easeOut", repeat: Infinity }}
+                        animate={{ x: 50, color: ["#F527B4", "#91E0F4"] }}
+                        transition={{ duration: 2, delay: 1, ease: "easeInOut", }}
                         className="text-5xl font-bold"
                     >
                         Latest Jobs For You!
