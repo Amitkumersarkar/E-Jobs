@@ -1,8 +1,9 @@
 import { FaMapLocationDot } from "react-icons/fa6";
 import { HiCurrencyBangladeshi } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 const HotJobsCard = ({ job }) => {
-    const { responsibilities, currency, company, requirements, description, salaryRange, title, category, company_logo, location, jobType, } = job;
+    const { _id, responsibilities, currency, company, requirements, description, salaryRange, title, category, company_logo, location, jobType, } = job;
     return (
         <div className="card bg-base-100 shadow-sm">
             <div className="flex gap-3 m-2">
@@ -32,7 +33,9 @@ const HotJobsCard = ({ job }) => {
                 </div>
                 <div className="card-actions justify-end items-center">
                     <p className="flex items-center gap-1">Salary : <HiCurrencyBangladeshi /> {salaryRange.min}-{salaryRange.max} {salaryRange.currency}</p>
-                    <button className="btn btn-primary mt-2">Apply Now</button>
+                    <Link to={`/jobs/${_id}`}>
+                        <button className="btn btn-primary mt-2">Apply Now</button>
+                    </Link>
                 </div>
             </div>
         </div>

@@ -8,6 +8,7 @@ import SignIn from './Pages/SignIn'
 import SignUp from './Pages/SignUp'
 import AuthProvider from './Context/AuthProvider'
 import Error from './Pages/ErrorPage/Error'
+import JobDetails from './Pages/JobDetails'
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,11 @@ const router = createBrowserRouter([
       {
         path: '/sign-up',
         element: <SignUp></SignUp>
-      }
+      },
+      {
+        path: '/jobs/:id',
+        element: <JobDetails></JobDetails>
+      },
     ]
   },
 ])
