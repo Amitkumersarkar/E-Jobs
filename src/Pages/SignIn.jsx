@@ -1,6 +1,6 @@
 import Lottie from "lottie-react";
 import loginAnimationData from "../assets/Lottie/Login Leady.json";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import AuthContext from "../Context/AuthContext";
@@ -9,9 +9,14 @@ const SignIn = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const { signIn } = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    console.log('in signIn page', location)
+    const from = location.state || '/';
 
     const handleSignIn = (e) => {
         e.preventDefault();
@@ -22,6 +27,7 @@ const SignIn = () => {
         signIn(email, password)
             .then((result) => {
                 console.log("Signed in:", result.user);
+                navigate(from);
                 setSuccess("Login successful!");
                 setError("");
                 form.reset();
