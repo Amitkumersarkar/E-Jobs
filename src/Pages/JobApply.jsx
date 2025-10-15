@@ -1,17 +1,36 @@
 import { useParams } from "react-router-dom";
+import useAuth from "../CustomHooks/useAuth";
 
 const JobApply = () => {
     const { id } = useParams();
-    // console.log(id);
+    const { user } = useAuth();
+    // console.log(id, user);
 
     const SubmitJobApplication = (e) => {
         e.preventDefault();
         const form = e.target;
-        const linkedin = form.linkedin.value;
+        const linkedIn = form.linkedIn.value;
         const github = form.github.value;
         const resume = form.resume.value;
 
-        console.log(linkedin, github, resume);
+        // console.log(linkedIn, github, resume);
+        const jobApplication = {
+            job_id: id,
+            applicant_email: user.email,
+            linkedIn,
+            github,
+            resume
+        }
+        fetch('http://localhost:3000/job-applications', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+
+            },
+            body: JSON.stringify(jobApplication)
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
 
     }
 
@@ -21,7 +40,7 @@ const JobApply = () => {
                 <legend className="fieldset-legend ">Information</legend>
 
                 <label className="label text-cyan-500">LinkedIn URL</label>
-                <input name="linkedin" type="url" className="input w-2xl" required placeholder="Enter Your LinkedIn URL" />
+                <input name="linkedIn" type="url" className="input w-2xl" required placeholder="Enter Your LinkedIn URL" />
 
                 <label className="label text-cyan-500">Github URL</label>
                 <input name="github" type="url" className="input w-2xl" required placeholder="Enter Your Github URL" />
