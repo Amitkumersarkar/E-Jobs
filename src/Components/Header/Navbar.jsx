@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
     const links = <>
@@ -6,6 +6,7 @@ const Navbar = () => {
         <li><a>About</a></li>
         <li><a>Jobs</a></li>
         <li><a>Contact</a></li>
+        <li><a><Link to='/myApplications'>My Applications</Link> </a></li>
     </>
     return (
         <div className="navbar bg-base-100 shadow-sm">
