@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
-
+import logo from "../../assets/images/youthLogo.png";
 const Navbar = () => {
+
     const navLinks = (
         <>
             <li>
@@ -65,7 +66,9 @@ const Navbar = () => {
                         to="/"
                         className="text-2xl font-bold text-cyan-600 tracking-wide hover:text-cyan-700 transition"
                     >
-                        E-Jobs
+                        <img src={logo} alt="Youth Logo"
+                            className="h-10 sm:h-12 object-contain" />
+
                     </Link>
 
                     {/* Mobile Dropdown */}
