@@ -4,7 +4,7 @@ const Navbar = () => {
     const links = <>
         <li><a>Home</a></li>
         <li><a>About</a></li>
-        <li><a>Jobs</a></li>
+        <li><a><Link to='/add-job'>Add Job</Link></a></li>
         <li><a>Contact</a></li>
         <li><a><Link to='/myApplications'>My Applications</Link> </a></li>
     </>
