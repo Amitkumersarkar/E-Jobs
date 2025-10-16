@@ -1,43 +1,105 @@
 import { motion } from "framer-motion";
 import team1 from "../assets/images/peopleInOffice.jpg";
-import Team2 from "../assets/images/excited.jpg";
+import team2 from "../assets/images/excited.jpg";
+import team3 from "../assets/images/businesspeople-meeting.jpg";
+import team4 from "../assets/images/office-space.jpg";
 
 const Banner = () => {
     return (
-        <div className="hero bg-base-200 min-h-96">
-            <div className="hero-content flex-col lg:flex-row-reverse">
-                <div className="flex-1 flex gap-5">
-                    <motion.img
-                        src={team1}
-                        animate={{ y: [50, 100, 50] }}
-                        transition={{ duration: 10, repeat: Infinity }}
-                        className="max-w-sm w-70 rounded-tl-[40px] rounded-br-[40px] border-l-[5px] border-b-[4px] border-l-cyan-600 shadow-2xl"
-                    />
-                    <motion.img
-                        src={Team2}
-                        animate={{ x: [100, 150, 100] }}
-                        transition={{ duration: 10, repeat: Infinity }}
-                        className="max-w-sm w-70 rounded-tl-[40px] rounded-br-[40px] border-l-[5px] border-b-[4px] border-l-cyan-600 shadow-2xl"
-                    />
-                </div>
-                <div className="flex-1">
+        <section className="relative overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-cyan-100 min-h-screen flex items-center px-6 py-10">
+            {/* ===== Decorative Background Shapes ===== */}
+            <div className="absolute inset-0">
+                <div className="absolute w-72 h-72 bg-cyan-200 opacity-30 rounded-full top-10 -left-16 blur-3xl"></div>
+                <div className="absolute w-96 h-96 bg-pink-200 opacity-25 rounded-full bottom-0 right-10 blur-3xl"></div>
+                <div className="absolute w-64 h-64 bg-cyan-300 opacity-20 rounded-full bottom-20 left-1/3 blur-2xl"></div>
+            </div>
+
+            {/* ===== Main Content ===== */}
+            <div className="relative max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12 z-10">
+
+                {/* ====== TEXT SECTION ====== */}
+                <div className="w-full lg:w-1/2 text-center lg:text-left space-y-6">
                     <motion.h1
-                        animate={{ x: 50, color: ["#F527B4", "#91E0F4"] }}
-                        transition={{ duration: 2, delay: 1, ease: "easeInOut", }}
-                        className="text-5xl font-bold"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1 }}
+                        className="text-4xl sm:text-5xl font-extrabold text-cyan-700 leading-tight"
                     >
-                        Latest Jobs For You!
+                        Find Your Next <br />
+                        <span className="text-cyan-500">Dream Job</span> Today
                     </motion.h1>
 
-                    <p className="py-6">
-                        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                        quasi. In deleniti eaque aut repudiandae et a id nisi.
-                    </p>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1, delay: 0.3 }}
+                        className="text-gray-600 text-base leading-relaxed"
+                    >
+                        Join thousands of professionals and discover top job opportunities
+                        across industries. Let’s build your career path together.
+                    </motion.p>
 
-                    <button className="btn btn-primary">Get Started</button>
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="btn btn-primary mt-4"
+                    >
+                        Explore Jobs
+                    </motion.button>
+                </div>
+
+                {/* ====== IMAGE SECTION ====== */}
+                <div className="w-full lg:w-1/2 grid grid-cols-2 gap-5 justify-items-center relative">
+                    <motion.div
+                        animate={{ y: [0, -15, 0] }}
+                        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                        className="bg-white p-2 rounded-2xl shadow-lg border border-cyan-200 transform hover:scale-105 duration-300"
+                    >
+                        <img
+                            src={team1}
+                            alt="Team working"
+                            className="rounded-xl w-44 sm:w-52 md:w-60 object-cover"
+                        />
+                    </motion.div>
+
+                    <motion.div
+                        animate={{ y: [-10, 10, -10] }}
+                        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                        className="bg-white p-2 rounded-2xl shadow-lg border border-cyan-200 transform hover:scale-105 duration-300"
+                    >
+                        <img
+                            src={team2}
+                            alt="Excited team"
+                            className="rounded-xl w-44 sm:w-52 md:w-60 object-cover"
+                        />
+                    </motion.div>
+
+                    <motion.div
+                        animate={{ scale: [1, 1.03, 1] }}
+                        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                        className="bg-white p-2 rounded-2xl shadow-lg border border-cyan-200 transform hover:scale-105 duration-300"
+                    >
+                        <img
+                            src={team3}
+                            alt="Meeting"
+                            className="rounded-xl w-44 sm:w-52 md:w-60 object-cover"
+                        />
+                    </motion.div>
+
+                    <motion.div
+                        animate={{ rotate: [0, 2, -2, 0] }}
+                        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                        className="bg-white p-2 rounded-2xl shadow-lg border border-cyan-200 transform hover:scale-105 duration-300"
+                    >
+                        <img
+                            src={team4}
+                            alt="Office space"
+                            className="rounded-xl w-44 sm:w-52 md:w-60 object-cover"
+                        />
+                    </motion.div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 
