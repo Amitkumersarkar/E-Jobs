@@ -46,6 +46,16 @@ const Navbar = () => {
             </li>
             <li>
                 <NavLink
+                    to="/statistic"
+                    className={({ isActive }) =>
+                        isActive ? "text-cyan-600 font-semibold" : "hover:text-cyan-500"
+                    }
+                >
+                    Statistics
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
                     to="/contact"
                     className={({ isActive }) =>
                         isActive ? "text-cyan-600 font-semibold" : "hover:text-cyan-500"

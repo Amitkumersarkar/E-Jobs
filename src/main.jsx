@@ -18,6 +18,7 @@ import Contact from './Pages/Contact/Contact'
 import Terms from './Pages/Terms/Terms'
 import Privacy from './Pages/PrivacyPolicy/Privacy'
 import Cookie from './Pages/CookiePolicy/Cookie'
+import Statistics from './Pages/StatisticsPage/Statistics'
 
 const router = createBrowserRouter([
   {
@@ -74,7 +75,10 @@ const router = createBrowserRouter([
         path: '/cookie',
         element: <Cookie></Cookie>
       },
-
+      {
+        path: '/statistic',
+        element: <PrivateRoute><Statistics></Statistics></PrivateRoute>
+      }
     ]
   },
 ])
