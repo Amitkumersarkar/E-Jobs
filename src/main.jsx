@@ -13,6 +13,11 @@ import PrivateRoute from './Routes/PrivateRoute'
 import JobApply from './Pages/JobApply'
 import MyApplications from './Pages/MyApplication/MyApplications'
 import AddJob from './Pages/AddJob/AddJob'
+import About from './Pages/About/About'
+import Contact from './Pages/Contact/Contact'
+import Terms from './Pages/Terms/Terms'
+import Privacy from './Pages/PrivacyPolicy/Privacy'
+import Cookie from './Pages/CookiePolicy/Cookie'
 
 const router = createBrowserRouter([
   {
@@ -48,7 +53,28 @@ const router = createBrowserRouter([
       {
         path: '/add-job',
         element: <PrivateRoute><AddJob></AddJob></PrivateRoute>
-      }
+      },
+      {
+        path: '/about',
+        element: <PrivateRoute><About></About></PrivateRoute>
+      },
+      {
+        path: '/contact',
+        element: <PrivateRoute><Contact></Contact></PrivateRoute>
+      },
+      {
+        path: "/terms",
+        element: <Terms></Terms>
+      },
+      {
+        path: '/privacy',
+        element: <Privacy></Privacy>
+      },
+      {
+        path: '/cookie',
+        element: <Cookie></Cookie>
+      },
+
     ]
   },
 ])

@@ -8,6 +8,7 @@ const JobDetails = () => {
         <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-2xl mt-12">
             <h2 className="text-3xl font-bold text-cyan-700 mb-4">{title}</h2>
 
+
             <div className="text-gray-700 mb-2">
                 <strong>Company:</strong> {company}
             </div>

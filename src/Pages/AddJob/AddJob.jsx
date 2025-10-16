@@ -9,12 +9,12 @@ const AddJob = () => {
 
             <form className="w-full max-w-lg bg-white p-6 rounded-xl shadow-lg">
                 <fieldset className="border border-cyan-300 rounded-lg p-4">
-                    <legend className="text-lg font-semibold text-center text-cyan-500 px-2">
+                    <legend className="text-lg font-bold text-center text-cyan-500 px-2">
                         Job Information
                     </legend>
 
                     {/* Job Title */}
-                    <label className="label font-bold text-cyan-500 mt-4">Job Title</label>
+                    <label className="label font-semibold text-cyan-500 mt-4">Job Title</label>
                     <input
                         type="text"
                         name="title"
@@ -23,7 +23,7 @@ const AddJob = () => {
                     />
 
                     {/* Job Location */}
-                    <label className="label font-bold text-cyan-500 mt-4">Job Location</label>
+                    <label className="label font-semibold text-cyan-500 mt-4">Job Location</label>
                     <input
                         type="text"
                         name="location"
@@ -32,7 +32,7 @@ const AddJob = () => {
                     />
 
                     {/* Job Field */}
-                    <label className="label font-bold text-cyan-500 mt-4">Job Field</label>
+                    <label className="label font-semibold text-cyan-500 mt-4">Job Field</label>
                     <select className="select select-bordered w-full">
                         <option disabled selected>
                             Pick a field
@@ -44,7 +44,7 @@ const AddJob = () => {
                     </select>
 
                     {/* Job Type */}
-                    <label className="label font-bold text-cyan-500 mt-4">Job Type</label>
+                    <label className="label font-semibold text-cyan-500 mt-4">Job Type</label>
                     <select className="select select-bordered w-full">
                         <option disabled selected>
                             Pick a job type
@@ -56,7 +56,7 @@ const AddJob = () => {
                     </select>
 
                     {/* Salary Range */}
-                    <label className="label font-bold text-cyan-500 mt-4">Salary Range</label>
+                    <label className="label font-semibold text-cyan-500 mt-4">Salary Range</label>
                     <input
                         type="text"
                         name="salary"
@@ -67,11 +67,24 @@ const AddJob = () => {
                     {/* Job Description */}
                     <div className="form-control mt-4">
                         <label className="label">
-                            <span className="label-text font-semibold">Job Description</span>
+                            <span className="label-text text-cyan-500 font-semibold">Job Description</span>
                         </label>
                         <textarea
                             className="textarea textarea-bordered w-full"
                             name="description"
+                            placeholder="Add Job Description"
+                            rows={5}
+                            required
+                        ></textarea>
+                    </div>
+                    {/* Job Requirements  */}
+                    <div className="form-control mt-4">
+                        <label className="label">
+                            <span className="label-text text-cyan-500 font-semibold">Job  Requirements</span>
+                        </label>
+                        <textarea
+                            className="textarea textarea-bordered w-full"
+                            name=" Requirements"
                             placeholder="Add Job Requirements"
                             rows={5}
                             required

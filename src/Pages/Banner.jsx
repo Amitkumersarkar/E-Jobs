@@ -3,6 +3,7 @@ import team1 from "../assets/images/peopleInOffice.jpg";
 import team2 from "../assets/images/excited.jpg";
 import team3 from "../assets/images/businesspeople-meeting.jpg";
 import team4 from "../assets/images/office-space.jpg";
+import { NavLink } from "react-router-dom";
 
 const Banner = () => {
     return (
@@ -44,7 +45,7 @@ const Banner = () => {
                         whileTap={{ scale: 0.95 }}
                         className="btn btn-primary mt-4"
                     >
-                        Explore Jobs
+                        <NavLink to='/'>Explore Jobs</NavLink>
                     </motion.button>
                 </div>
 
