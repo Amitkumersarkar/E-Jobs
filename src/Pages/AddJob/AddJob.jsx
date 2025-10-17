@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../CustomHooks/useAuth";
 
 const AddJob = () => {
     const [logoPreview, setLogoPreview] = useState("");
     const [showSuccess, setShowSuccess] = useState(false);
     const navigate = useNavigate();
+    const { user } = useAuth();
 
     const handleSubmitJob = async (event) => {
         event.preventDefault();
@@ -124,6 +126,7 @@ const AddJob = () => {
                             <input
                                 type="email"
                                 name="email"
+                                defaultValue={user?.email}
                                 className="input input-bordered w-full focus:ring-2 focus:ring-cyan-400"
                                 placeholder="Enter HR email"
                                 required
