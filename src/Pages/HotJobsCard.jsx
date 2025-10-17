@@ -7,13 +7,13 @@ const HotJobsCard = ({ job }) => {
     const {
         _id,
         company,
-        company_logo,
+        logo,
         title,
         location,
-        salaryRange,
-        requirements,
+        salary,
+        requirements = [],
         description,
-        jobType,
+        type,
     } = job;
 
     return (
@@ -22,11 +22,11 @@ const HotJobsCard = ({ job }) => {
             transition={{ type: "spring", stiffness: 250 }}
             className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden flex flex-col w-full sm:w-80 md:w-96 h-full"
         >
-            {/* Header: Logo + Company Info */}
+            {/* Header */}
             <div className="flex items-center gap-3 p-4 bg-cyan-50">
                 <figure>
                     <img
-                        src={company_logo}
+                        src={logo || "https://via.placeholder.com/64?text=Logo"}
                         alt={company}
                         className="w-16 h-16 object-contain rounded-xl border border-gray-200 p-2 bg-white"
                     />
@@ -43,9 +43,9 @@ const HotJobsCard = ({ job }) => {
             <div className="p-5 flex flex-col flex-1 gap-3">
                 <div className="flex items-center justify-between">
                     <h3 className="text-lg sm:text-xl font-bold text-cyan-700">{title}</h3>
-                    {jobType && (
+                    {type && (
                         <span className="badge bg-cyan-100 text-cyan-700 border-none">
-                            {jobType}
+                            {type}
                         </span>
                     )}
                 </div>
@@ -54,21 +54,24 @@ const HotJobsCard = ({ job }) => {
 
                 {/* Requirements */}
                 <div className="flex flex-wrap gap-2 mt-2">
-                    {requirements?.slice(0, 5).map((req, idx) => (
+                    {(Array.isArray(requirements)
+                        ? requirements
+                        : requirements?.split(",") || []
+                    ).slice(0, 5).map((req, idx) => (
                         <span
                             key={idx}
                             className="text-sm px-3 py-1 rounded-full bg-cyan-50 text-cyan-700 border border-cyan-100 hover:bg-cyan-100 transition-colors"
                         >
-                            {req}
+                            {req.trim()}
                         </span>
                     ))}
                 </div>
 
-                {/* Footer: Salary + Apply Button */}
+                {/* Footer */}
                 <div className="mt-auto flex flex-col sm:flex-row justify-between items-center gap-2 pt-4 border-t border-gray-100">
                     <p className="flex items-center gap-1 text-sm sm:text-base font-medium text-gray-700">
                         <HiCurrencyBangladeshi className="text-cyan-600 text-lg" />
-                        {salaryRange?.min} - {salaryRange?.max} {salaryRange?.currency}
+                        {salary || "Negotiable"}
                     </p>
                     <Link to={`/jobs/${_id}`}>
                         <motion.button

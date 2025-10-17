@@ -1,35 +1,57 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddJob = () => {
     const [logoPreview, setLogoPreview] = useState("");
     const [showSuccess, setShowSuccess] = useState(false);
+    const navigate = useNavigate();
 
-    const handleSubmitJob = (event) => {
+    const handleSubmitJob = async (event) => {
         event.preventDefault();
         const form = event.target;
 
         const jobData = {
             company: form.company.value,
-            logo: form.logo.value,
+            company_logo: form.logo.value,
             hr_name: form.hr_name.value,
             email: form.email.value,
             title: form.title.value,
             location: form.location.value,
             field: form.field.value,
-            type: form.type.value,
-            salary: form.salary.value,
+            jobType: form.type.value,
+            salaryRange: form.salary.value,
             description: form.description.value,
-            requirements: form.requirements.value,
+            requirements: form.requirements.value
+                .split(",")
+                .map((req) => req.trim())
+                .filter((req) => req.length > 0),
         };
 
         console.log("Job submitted:", jobData);
 
-        // show success message
-        setShowSuccess(true);
-        setTimeout(() => setShowSuccess(false), 3000);
+        try {
+            const res = await fetch("http://localhost:3000/jobs", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(jobData),
+            });
 
-        form.reset();
-        setLogoPreview("");
+            const data = await res.json();
+            console.log("Backend Response:", data);
+
+            if (data.success) {
+                setShowSuccess(true);
+                setTimeout(() => {
+                    setShowSuccess(false);
+                    navigate("/hot-jobs");
+                }, 1500);
+            }
+
+            form.reset();
+            setLogoPreview("");
+        } catch (error) {
+            console.error("Error submitting job:", error);
+        }
     };
 
     const handleLogoChange = (e) => {
@@ -38,14 +60,14 @@ const AddJob = () => {
     };
 
     return (
-        <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-cyan-50 via-white to-cyan-100 py-10 px-4">
-            <div className="w-full max-w-3xl bg-white/80 backdrop-blur-md shadow-xl rounded-3xl border border-cyan-100 p-8">
+        <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-cyan-100 via-cyan-50 to-white py-10 px-4">
+            <div className="w-full max-w-3xl bg-white/95 backdrop-blur-md shadow-xl rounded-3xl border border-cyan-200 p-8">
                 <h2 className="text-3xl font-bold text-center text-cyan-600 mb-8">
                     🚀 Post a New Job
                 </h2>
 
                 <form onSubmit={handleSubmitJob} className="space-y-6">
-                    {/* Company Logo URL */}
+                    {/* Company Logo */}
                     <div>
                         <label className="block text-gray-700 font-medium mb-1">
                             Company Logo URL
@@ -104,6 +126,7 @@ const AddJob = () => {
                                 name="email"
                                 className="input input-bordered w-full focus:ring-2 focus:ring-cyan-400"
                                 placeholder="Enter HR email"
+                                required
                             />
                         </div>
                     </div>
@@ -131,6 +154,7 @@ const AddJob = () => {
                                 name="location"
                                 className="input input-bordered w-full focus:ring-2 focus:ring-cyan-400"
                                 placeholder="Enter location"
+                                required
                             />
                         </div>
                     </div>
@@ -144,6 +168,7 @@ const AddJob = () => {
                             <select
                                 name="field"
                                 className="select select-bordered w-full focus:ring-2 focus:ring-cyan-400"
+                                required
                             >
                                 <option value="">Choose field</option>
                                 <option>Engineering</option>
@@ -160,6 +185,7 @@ const AddJob = () => {
                             <select
                                 name="type"
                                 className="select select-bordered w-full focus:ring-2 focus:ring-cyan-400"
+                                required
                             >
                                 <option value="">Choose type</option>
                                 <option>Remote</option>
@@ -193,6 +219,7 @@ const AddJob = () => {
                             className="textarea textarea-bordered w-full focus:ring-2 focus:ring-cyan-400"
                             placeholder="Write a short job description"
                             rows="4"
+                            required
                         ></textarea>
                     </div>
 
@@ -204,8 +231,9 @@ const AddJob = () => {
                         <textarea
                             name="requirements"
                             className="textarea textarea-bordered w-full focus:ring-2 focus:ring-cyan-400"
-                            placeholder="List key requirements"
+                            placeholder="Enter key requirements separated by commas. e.g. React, JavaScript, Tailwind"
                             rows="3"
+                            required
                         ></textarea>
                     </div>
 

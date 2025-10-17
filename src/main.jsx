@@ -19,6 +19,7 @@ import Terms from './Pages/Terms/Terms'
 import Privacy from './Pages/PrivacyPolicy/Privacy'
 import Cookie from './Pages/CookiePolicy/Cookie'
 import Statistics from './Pages/StatisticsPage/Statistics'
+import HotJobs from './Pages/HotJobs'
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
         path: '/jobs/:id',
         element: <PrivateRoute><JobDetails></JobDetails></PrivateRoute>,
         loader: ({ params }) => fetch(`http://localhost:3000/jobs/${params.id}`)
+      },
+      {
+        path: '/hot-jobs',
+        element: <HotJobs></HotJobs>
       },
       {
         path: '/jobApply/:id',

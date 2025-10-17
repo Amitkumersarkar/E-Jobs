@@ -45,7 +45,7 @@ const Banner = () => {
                         whileTap={{ scale: 0.95 }}
                         className="btn btn-primary mt-4"
                     >
-                        <NavLink to='/'>Explore Jobs</NavLink>
+                        <NavLink to='/hot-jobs'>Explore Jobs</NavLink>
                     </motion.button>
                 </div>
 
