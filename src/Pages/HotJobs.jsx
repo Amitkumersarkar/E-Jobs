@@ -25,7 +25,7 @@ const HotJobs = () => {
             </div>
 
             {/* Jobs Grid */}
-            <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {jobs.map((job) => (
                     <motion.div
                         key={job._id}

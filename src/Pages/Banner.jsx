@@ -8,17 +8,17 @@ import { NavLink } from "react-router-dom";
 const Banner = () => {
     return (
         <section className="relative overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-cyan-100 min-h-screen flex items-center px-6 py-10">
-            {/* ===== Decorative Background Shapes ===== */}
+            {/* Decorative Background Shapes  */}
             <div className="absolute inset-0">
                 <div className="absolute w-72 h-72 bg-cyan-200 opacity-30 rounded-full top-10 -left-16 blur-3xl"></div>
                 <div className="absolute w-96 h-96 bg-pink-200 opacity-25 rounded-full bottom-0 right-10 blur-3xl"></div>
                 <div className="absolute w-64 h-64 bg-cyan-300 opacity-20 rounded-full bottom-20 left-1/3 blur-2xl"></div>
             </div>
 
-            {/* ===== Main Content ===== */}
-            <div className="relative max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12 z-10">
+            {/*  Main Content  */}
+            <div className="relative max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 z-10">
 
-                {/* ====== TEXT SECTION ====== */}
+                {/*  TEXT SECTION  */}
                 <div className="w-full lg:w-1/2 text-center lg:text-left space-y-6">
                     <motion.h1
                         initial={{ opacity: 0, y: 30 }}
@@ -49,7 +49,7 @@ const Banner = () => {
                     </motion.button>
                 </div>
 
-                {/* ====== IMAGE SECTION ====== */}
+                {/*  IMAGE SECTION  */}
                 <div className="w-full lg:w-1/2 grid grid-cols-2 gap-5 justify-items-center relative">
                     <motion.div
                         animate={{ y: [0, -15, 0] }}

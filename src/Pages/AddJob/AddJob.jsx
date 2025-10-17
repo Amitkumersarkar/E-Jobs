@@ -26,7 +26,7 @@ const AddJob = () => {
             </h2>
 
             <div className="w-full max-w-6xl grid md:grid-cols-2 gap-8">
-                {/* === Form Section === */}
+                {/*  Form Section  */}
                 <form className="bg-white/90 backdrop-blur-md shadow-lg rounded-2xl p-8 border border-cyan-100">
                     <fieldset className="space-y-4">
                         <legend className="text-xl font-semibold text-cyan-500 mb-2 border-b pb-2">
@@ -135,7 +135,7 @@ const AddJob = () => {
                     </fieldset>
                 </form>
 
-                {/* === Live Preview Section === */}
+                {/*  Live Preview Section  */}
                 <div className="bg-white shadow-md rounded-2xl p-6 border border-cyan-100 hover:shadow-xl transition duration-300">
                     <h3 className="text-xl font-semibold text-cyan-600 mb-4 border-b pb-2">
                         Live Job Preview

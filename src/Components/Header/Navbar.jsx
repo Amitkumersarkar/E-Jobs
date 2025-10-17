@@ -70,7 +70,7 @@ const Navbar = () => {
     return (
         <div className="bg-white shadow-md sticky top-0 z-50">
             <div className="navbar max-w-6xl mx-auto px-4 py-2">
-                {/* === Left: Brand === */}
+                {/*  Left: Brand  */}
                 <div className="navbar-start">
                     <Link
                         to="/"
@@ -103,12 +103,12 @@ const Navbar = () => {
                     </div>
                 </div>
 
-                {/* === Center (Desktop Menu) === */}
+                {/*  Center (Desktop Menu)  */}
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 gap-3">{navLinks}</ul>
                 </div>
 
-                {/* === Right (Button) === */}
+                {/* Right (Button)  */}
                 <div className="navbar-end">
                     <Link
                         to="/sign-in"
