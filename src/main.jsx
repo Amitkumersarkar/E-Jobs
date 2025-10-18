@@ -21,6 +21,7 @@ import Cookie from './Pages/CookiePolicy/Cookie'
 import Statistics from './Pages/StatisticsPage/Statistics'
 import HotJobs from './Pages/HotJobs'
 import MyPostedJobs from './Pages/MyPostedJobs/MyPostedJobs'
+import ViewApplications from './Pages/ViewApplications/ViewApplications'
 
 const router = createBrowserRouter([
   {
@@ -88,6 +89,10 @@ const router = createBrowserRouter([
       {
         path: '/postedJobs',
         element: <PrivateRoute><MyPostedJobs></MyPostedJobs></PrivateRoute>
+      },
+      {
+        path: '/viewApplications/:job_id',
+        element: <PrivateRoute><ViewApplications></ViewApplications></PrivateRoute>
       }
     ]
   },

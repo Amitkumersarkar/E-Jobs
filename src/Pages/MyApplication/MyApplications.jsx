@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../CustomHooks/useAuth";
+import Swal from "sweetalert2";
 
 const MyApplications = () => {
     const { user } = useAuth();
     const [jobs, setJobs] = useState([]);
 
+    // Fetch user's applications
     useEffect(() => {
         if (user?.email) {
             fetch(`http://localhost:3000/job-application?email=${user.email}`)
@@ -14,8 +16,55 @@ const MyApplications = () => {
         }
     }, [user?.email]);
 
+    // Delete application with SweetAlert
+    const handleDelete = async (id) => {
+        const result = await Swal.fire({
+            title: "Are you sure?",
+            text: "This application will be permanently deleted.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        });
+
+        if (result.isConfirmed) {
+            try {
+                const res = await fetch(`http://localhost:3000/job-applications/${id}`, {
+                    method: "DELETE",
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    setJobs((prevJobs) => prevJobs.filter((job) => job._id !== id));
+
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Application has been removed successfully.",
+                        icon: "success",
+                        timer: 1500,
+                        showConfirmButton: false,
+                    });
+                } else {
+                    Swal.fire({
+                        title: "Error!",
+                        text: data.message || "Failed to delete the application.",
+                        icon: "error",
+                    });
+                }
+            } catch (err) {
+                Swal.fire({
+                    title: "Error!",
+                    text: "Something went wrong while deleting.",
+                    icon: "error",
+                });
+                console.error("Error deleting application:", err);
+            }
+        }
+    };
+
     return (
-        <div className="w-11/12 max-w-6xl mx-auto py-12">
+        <div className="min-h-screen bg-gradient-to-br from-cyan-100 via-cyan-60 to-white py-10 px-4">
             <h2 className="text-3xl font-bold mb-6 text-cyan-700">
                 My Applications ({jobs.length})
             </h2>
@@ -24,11 +73,7 @@ const MyApplications = () => {
                 <table className="table w-full border border-gray-200 rounded-lg">
                     <thead className="bg-cyan-50">
                         <tr>
-                            <th>
-                                <label>
-                                    <input type="checkbox" className="checkbox" />
-                                </label>
-                            </th>
+                            <th></th>
                             <th>Name</th>
                             <th>Job</th>
                             <th>Status</th>
@@ -39,39 +84,9 @@ const MyApplications = () => {
                         {jobs.length > 0 ? (
                             jobs.map((job, index) => (
                                 <tr key={job._id || index} className="hover:bg-gray-50">
-                                    <th>
-                                        <label>
-                                            <input type="checkbox" className="checkbox" />
-                                        </label>
-                                    </th>
-                                    <td>
-                                        <div className="flex items-center gap-3">
-                                            <div className="avatar">
-                                                <div className="mask mask-squircle h-12 w-12">
-                                                    <img
-                                                        src={
-                                                            job.logo ||
-                                                            "https://img.daisyui.com/images/profile/demo/2@94.webp"
-                                                        }
-                                                        alt={job.name}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div className="font-bold">{job.name}</div>
-                                                <div className="text-sm opacity-50">
-                                                    {job.location || "Unknown"}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        {job.company}
-                                        <br />
-                                        <span className="badge badge-info badge-sm">
-                                            {job.position}
-                                        </span>
-                                    </td>
+                                    <th>{index + 1}</th>
+                                    <td>{job.name}</td>
+                                    <td>{job.company}</td>
                                     <td>
                                         <span
                                             className={`badge ${job.status === "Approved"
@@ -84,11 +99,14 @@ const MyApplications = () => {
                                             {job.status || "Pending"}
                                         </span>
                                     </td>
-                                    <th>
-                                        <button className="btn btn-ghost btn-xs text-red-500 hover:text-red-700">
+                                    <td>
+                                        <button
+                                            onClick={() => handleDelete(job._id)}
+                                            className="btn btn-ghost btn-xs text-red-500 hover:text-red-700"
+                                        >
                                             Delete
                                         </button>
-                                    </th>
+                                    </td>
                                 </tr>
                             ))
                         ) : (

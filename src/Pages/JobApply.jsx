@@ -1,69 +1,121 @@
 import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../CustomHooks/useAuth";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 const JobApply = () => {
     const { id } = useParams();
     const { user } = useAuth();
     const navigate = useNavigate();
-    // console.log(id, user);
+    const [loading, setLoading] = useState(false);
 
-    const SubmitJobApplication = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const form = e.target;
-        const linkedIn = form.linkedIn.value;
-        const github = form.github.value;
-        const resume = form.resume.value;
+        setLoading(true);
 
-        // console.log(linkedIn, github, resume);
+        const form = e.target;
+        const linkedIn = form.linkedIn.value.trim();
+        const github = form.github.value.trim();
+        const resume = form.resume.value.trim();
+
+        if (!linkedIn || !github || !resume) {
+            Swal.fire("Oops!", "Please fill in all fields.", "warning");
+            setLoading(false);
+            return;
+        }
+
         const jobApplication = {
             job_id: id,
-            applicant_email: user.email,
+            applicant_email: user?.email,
             linkedIn,
             github,
-            resume
+            resume,
+            applied_date: new Date().toISOString(),
+        };
+
+        try {
+            const res = await fetch("http://localhost:3000/job-applications", {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                },
+                body: JSON.stringify(jobApplication),
+            });
+
+            const data = await res.json();
+
+            if (data.success || data.insertedId) {
+                Swal.fire({
+                    position: "top",
+                    icon: "success",
+                    title: "Application submitted successfully!",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                navigate("/myApplications");
+            } else {
+                Swal.fire("Error", "Failed to submit your application.", "error");
+            }
+        } catch (err) {
+            Swal.fire("Server Error", "Something went wrong. Please try again.", "error");
+            console.error(err);
+        } finally {
+            setLoading(false);
         }
-        fetch('http://localhost:3000/job-applications', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-
-            },
-            body: JSON.stringify(jobApplication)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.insertedId) {
-                    Swal.fire({
-                        position: "top",
-                        icon: "success",
-                        title: "Your work has been saved",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    navigate('/myApplications')
-                }
-            })
-
-    }
+    };
 
     return (
-        <form onSubmit={SubmitJobApplication} className="flex justify-center m-5">
-            <fieldset className="fieldset text-center bg-base-500 border-blue-600 rounded-box w-2xl border p-4 pb-5 mb-25">
-                <legend className="fieldset-legend ">Information</legend>
+        <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-cyan-50 via-white to-cyan-100 p-4 sm:p-6">
+            <form
+                onSubmit={handleSubmit}
+                className="w-full max-w-lg bg-white shadow-xl rounded-2xl p-6 sm:p-8 border border-cyan-100"
+            >
+                <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-cyan-700">
+                    Apply for Job
+                </h2>
 
-                <label className="label text-cyan-500">LinkedIn URL</label>
-                <input name="linkedIn" type="url" className="input w-2xl" required placeholder="Enter Your LinkedIn URL" />
+                <div className="form-control mb-4">
+                    <label className="label font-medium text-cyan-600">LinkedIn URL</label>
+                    <input
+                        name="linkedIn"
+                        type="url"
+                        placeholder="Enter your LinkedIn profile URL"
+                        className="input input-bordered w-full"
+                        required
+                    />
+                </div>
 
-                <label className="label text-cyan-500">Github URL</label>
-                <input name="github" type="url" className="input w-2xl" required placeholder="Enter Your Github URL" />
+                <div className="form-control mb-4">
+                    <label className="label font-medium text-cyan-600">GitHub URL</label>
+                    <input
+                        name="github"
+                        type="url"
+                        placeholder="Enter your GitHub profile URL"
+                        className="input input-bordered w-full"
+                        required
+                    />
+                </div>
 
-                <label className="label text-cyan-500">Resume URL</label>
-                <input name="resume" type="url" className="input w-2xl" required placeholder="Enter Your Resume URL" />
+                <div className="form-control mb-6">
+                    <label className="label font-medium text-cyan-600">Resume URL</label>
+                    <input
+                        name="resume"
+                        type="url"
+                        placeholder="Enter your resume link"
+                        className="input input-bordered w-full"
+                        required
+                    />
+                </div>
 
-                <button className="btn btn-info mt-4">Apply</button>
-            </fieldset >
-        </form>
+                <button
+                    type="submit"
+                    disabled={loading}
+                    className="btn btn-info w-full font-semibold text-white tracking-wide"
+                >
+                    {loading ? "Submitting..." : "Apply Now"}
+                </button>
+            </form>
+        </div>
     );
 };
 
