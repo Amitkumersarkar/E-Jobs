@@ -14,13 +14,14 @@ const AddJob = () => {
 
         const jobData = {
             company: form.company.value,
-            company_logo: form.logo.value,
+            logo: form.logo.value,
             hr_name: form.hr_name.value,
             email: form.email.value,
             title: form.title.value,
             location: form.location.value,
             field: form.field.value,
             jobType: form.type.value,
+            deadline: form.deadline.value,
             salaryRange: form.salary.value,
             description: form.description.value,
             requirements: form.requirements.value
@@ -209,6 +210,18 @@ const AddJob = () => {
                             name="salary"
                             className="input input-bordered w-full focus:ring-2 focus:ring-cyan-400"
                             placeholder="e.g. $500 - $1500"
+                        />
+                    </div>
+                    {/* application deadline */}
+                    <div>
+                        <label className="block text-gray-700 font-medium mb-1">
+                            DeadLine
+                        </label>
+                        <input
+                            type="date"
+                            name="deadline"
+                            className="input input-bordered w-full focus:ring-2 focus:ring-cyan-400"
+                            placeholder="Enter application deadline"
                         />
                     </div>
 

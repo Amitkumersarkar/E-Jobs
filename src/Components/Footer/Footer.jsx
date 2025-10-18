@@ -9,12 +9,12 @@ const Footer = () => {
                 <div>
                     <h6 className="text-lg font-bold text-cyan-700 mb-4">Services</h6>
                     <ul className="space-y-2">
-                        <li><a href="#" className="hover:text-cyan-500 transition">Branding</a></li>
-                        <li><a href="#" className="hover:text-cyan-500 transition">Development</a></li>
-                        <li><a href="#" className="hover:text-cyan-500 transition">Software</a></li>
-                        <li><a href="#" className="hover:text-cyan-500 transition">Design</a></li>
-                        <li><a href="#" className="hover:text-cyan-500 transition">Marketing</a></li>
-                        <li><a href="#" className="hover:text-cyan-500 transition">Advertisement</a></li>
+                        <li href="#" className="hover:text-cyan-500 transition">Branding</li>
+                        <li href="#" className="hover:text-cyan-500 transition">Development</li>
+                        <li href="#" className="hover:text-cyan-500 transition">Software</li>
+                        <li href="#" className="hover:text-cyan-500 transition">Design</li>
+                        <li href="#" className="hover:text-cyan-500 transition">Marketing</li>
+                        <li href="#" className="hover:text-cyan-500 transition">Advertisement</li>
                     </ul>
                 </div>
 
@@ -22,10 +22,15 @@ const Footer = () => {
                 <div>
                     <h6 className="text-lg font-bold text-cyan-700 mb-4">Company</h6>
                     <ul className="space-y-2">
-                        <li><a className="hover:text-cyan-500 transition"><Link to='/about'>About us</Link></a></li>
-                        <li><a className="hover:text-cyan-500 transition"><Link to='/contact'>Contact</Link></a></li>
-                        <li><a className="hover:text-cyan-500 transition"><Link to='/'>Jobs</Link></a></li>
-                        <li><a className="hover:text-cyan-500 transition"><Link to='/error'>Press kit</Link></a></li>
+                        <li>
+                            <Link to="/about" className="hover:text-cyan-500 transition">
+                                About us
+                            </Link>
+                        </li>
+
+                        <li className="hover:text-cyan-500 transition"><Link to='/contact'>Contact</Link></li>
+                        <li className="hover:text-cyan-500 transition"><Link to='/'>Jobs</Link></li>
+                        <li className="hover:text-cyan-500 transition"><Link to='/error'>Press kit</Link></li>
                     </ul>
                 </div>
 
@@ -33,9 +38,9 @@ const Footer = () => {
                 <div>
                     <h6 className="text-lg font-bold text-cyan-700 mb-4">Legal</h6>
                     <ul className="space-y-2">
-                        <li><a className="hover:text-cyan-500 transition"><Link to='/terms'>Terms of use</Link></a></li>
-                        <li><a className="hover:text-cyan-500 transition"><Link to='/privacy'>Privacy policy</Link></a></li>
-                        <li><a className="hover:text-cyan-500 transition"><Link to='/cookie'>Cookie policy</Link></a></li>
+                        <li className="hover:text-cyan-500 transition"><Link to='/terms'>Terms of use</Link></li>
+                        <li className="hover:text-cyan-500 transition"><Link to='/privacy'>Privacy policy</Link></li>
+                        <li className="hover:text-cyan-500 transition"><Link to='/cookie'>Cookie policy</Link></li>
                     </ul>
                 </div>
 

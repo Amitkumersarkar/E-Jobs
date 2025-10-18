@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { HiCurrencyBangladeshi } from "react-icons/hi";
+import { FaRegCalendarAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const HotJobsCard = ({ job }) => {
@@ -14,7 +15,15 @@ const HotJobsCard = ({ job }) => {
         requirements = [],
         description,
         type,
+        deadline
     } = job;
+
+    //  Handle logo display 
+    const logoSrc = logo?.startsWith("http")
+        ? logo
+        : logo
+            ? `http://localhost:3000/${logo}`
+            : "https://via.placeholder.com/64?text=Logo";
 
     return (
         <motion.div
@@ -26,7 +35,7 @@ const HotJobsCard = ({ job }) => {
             <div className="flex items-center gap-3 p-4 bg-cyan-50">
                 <figure>
                     <img
-                        src={logo || "https://via.placeholder.com/64?text=Logo"}
+                        src={logoSrc}
                         alt={company}
                         className="w-16 h-16 object-contain rounded-xl border border-gray-200 p-2 bg-white"
                     />
@@ -57,22 +66,41 @@ const HotJobsCard = ({ job }) => {
                     {(Array.isArray(requirements)
                         ? requirements
                         : requirements?.split(",") || []
-                    ).slice(0, 5).map((req, idx) => (
-                        <span
-                            key={idx}
-                            className="text-sm px-3 py-1 rounded-full bg-cyan-50 text-cyan-700 border border-cyan-100 hover:bg-cyan-100 transition-colors"
-                        >
-                            {req.trim()}
-                        </span>
-                    ))}
+                    )
+                        .slice(0, 5)
+                        .map((req, idx) => (
+                            <span
+                                key={idx}
+                                className="text-sm px-3 py-1 rounded-full bg-cyan-50 text-cyan-700 border border-cyan-100 hover:bg-cyan-100 transition-colors"
+                            >
+                                {req.trim()}
+                            </span>
+                        ))}
                 </div>
 
                 {/* Footer */}
-                <div className="mt-auto flex flex-col sm:flex-row justify-between items-center gap-2 pt-4 border-t border-gray-100">
-                    <p className="flex items-center gap-1 text-sm sm:text-base font-medium text-gray-700">
-                        <HiCurrencyBangladeshi className="text-cyan-600 text-lg" />
-                        {salary || "Negotiable"}
-                    </p>
+                <div className="mt-auto flex flex-col sm:flex-row justify-between items-center gap-3 pt-4 border-t border-gray-100">
+                    <div className="flex flex-col items-start text-sm sm:text-base font-medium text-gray-700">
+                        {/*  Deadline above salary */}
+                        {deadline && (
+                            <p className="flex items-center gap-1 text-gray-600">
+                                <FaRegCalendarAlt className="text-cyan-600 text-base" />
+                                Deadline:{" "}
+                                <span className="font-medium text-gray-800">
+                                    {new Date(deadline).toLocaleDateString("en-GB", {
+                                        day: "2-digit",
+                                        month: "short",
+                                        year: "numeric",
+                                    })}
+                                </span>
+                            </p>
+                        )}
+                        <p className="flex items-center gap-1 mt-1">
+                            <HiCurrencyBangladeshi className="text-cyan-600 text-lg" />
+                            {salary || "Negotiable"}
+                        </p>
+                    </div>
+
                     <Link to={`/jobs/${_id}`}>
                         <motion.button
                             whileHover={{ scale: 1.05 }}
