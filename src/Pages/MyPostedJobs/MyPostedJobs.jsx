@@ -7,7 +7,8 @@ const MyPostedJobs = () => {
     const [jobs, setJobs] = useState([]);
     const { user } = useAuth();
 
-    useEffect(() => {
+    // Fetch jobs
+    const fetchJobs = () => {
         if (!user?.email) return;
         fetch(`http://localhost:3000/jobs?email=${user.email}`)
             .then((res) => res.json())
@@ -29,7 +30,44 @@ const MyPostedJobs = () => {
                     icon: "error",
                 });
             });
+    };
+
+    useEffect(() => {
+        fetchJobs();
     }, [user?.email]);
+
+    // Delete job
+    const handleDeleteJob = async (jobId) => {
+        const confirm = await Swal.fire({
+            title: "Are you sure?",
+            text: "You won’t be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        });
+
+        if (confirm.isConfirmed) {
+            try {
+                const res = await fetch(`http://localhost:3000/jobs/${jobId}`, {
+                    method: "DELETE",
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    Swal.fire("Deleted!", "Job has been deleted.", "success");
+                    // Refresh job list
+                    fetchJobs();
+                } else {
+                    Swal.fire("Error", data.message || "Failed to delete job", "error");
+                }
+            } catch (err) {
+                console.error("Error deleting job:", err);
+                Swal.fire("Error", "Failed to delete job", "error");
+            }
+        }
+    };
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-cyan-100 via-white to-cyan-50 py-10 px-4 md:px-8 lg:px-16">
@@ -47,21 +85,18 @@ const MyPostedJobs = () => {
                             <th>Field</th>
                             <th>Type</th>
                             <th>Location</th>
-                            <th></th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {jobs.map((job, index) => (
-                            <tr
-                                key={job._id}
-                                className="hover:bg-cyan-50 transition-all"
-                            >
+                            <tr key={job._id} className="hover:bg-cyan-50 transition-all">
                                 <th>{index + 1}</th>
                                 <td>{job.company}</td>
                                 <td>{job.field}</td>
                                 <td>{job.jobType}</td>
                                 <td>{job.location}</td>
-                                <td>
+                                <td className="flex gap-2">
                                     <Link to={`/viewApplications/${job._id}`}>
                                         <button
                                             className="btn btn-info btn-sm font-semibold"
@@ -78,6 +113,12 @@ const MyPostedJobs = () => {
                                             View Applications
                                         </button>
                                     </Link>
+                                    <button
+                                        onClick={() => handleDeleteJob(job._id)}
+                                        className="btn btn-error btn-sm font-semibold"
+                                    >
+                                        Delete
+                                    </button>
                                 </td>
                             </tr>
                         ))}
@@ -104,7 +145,7 @@ const MyPostedJobs = () => {
                         <p className="text-gray-700 text-sm">
                             <strong>Location:</strong> {job.location}
                         </p>
-                        <div className="mt-3">
+                        <div className="mt-3 flex flex-col gap-2">
                             <Link to={`/viewApplications/${job._id}`}>
                                 <button
                                     className="btn btn-info btn-sm font-semibold w-full"
@@ -121,6 +162,12 @@ const MyPostedJobs = () => {
                                     View Applications
                                 </button>
                             </Link>
+                            <button
+                                onClick={() => handleDeleteJob(job._id)}
+                                className="btn btn-error btn-sm font-semibold w-full"
+                            >
+                                Delete
+                            </button>
                         </div>
                     </div>
                 ))}
