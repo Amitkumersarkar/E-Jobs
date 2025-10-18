@@ -50,7 +50,7 @@ const MyApplications = () => {
                                                 <div className="mask mask-squircle h-12 w-12">
                                                     <img
                                                         src={
-                                                            job.avatar ||
+                                                            job.logo ||
                                                             "https://img.daisyui.com/images/profile/demo/2@94.webp"
                                                         }
                                                         alt={job.name}
@@ -75,10 +75,10 @@ const MyApplications = () => {
                                     <td>
                                         <span
                                             className={`badge ${job.status === "Approved"
-                                                    ? "badge-success"
-                                                    : job.status === "Rejected"
-                                                        ? "badge-error"
-                                                        : "badge-warning"
+                                                ? "badge-success"
+                                                : job.status === "Rejected"
+                                                    ? "badge-error"
+                                                    : "badge-warning"
                                                 } badge-sm`}
                                         >
                                             {job.status || "Pending"}

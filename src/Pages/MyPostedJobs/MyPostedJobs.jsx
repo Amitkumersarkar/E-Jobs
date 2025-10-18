@@ -14,7 +14,7 @@ const MyPostedJobs = () => {
     }, [user?.email]);
 
     return (
-        <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-cyan-100 via-cyan-50 to-white py-10 px-4">
+        <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-cyan-100 via-cyan-60 to-white py-10 px-4">
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
