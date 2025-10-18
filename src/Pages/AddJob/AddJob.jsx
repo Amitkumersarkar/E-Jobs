@@ -16,7 +16,7 @@ const AddJob = () => {
             company: form.company.value,
             logo: form.logo.value,
             hr_name: form.hr_name.value,
-            email: form.email.value,
+            hr_email: form.hr_email.value,
             title: form.title.value,
             location: form.location.value,
             field: form.field.value,
@@ -126,7 +126,7 @@ const AddJob = () => {
                             </label>
                             <input
                                 type="email"
-                                name="email"
+                                name="hr_email"
                                 defaultValue={user?.email}
                                 className="input input-bordered w-full focus:ring-2 focus:ring-cyan-400"
                                 placeholder="Enter HR email"
