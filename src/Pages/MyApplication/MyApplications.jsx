@@ -5,18 +5,26 @@ import Swal from "sweetalert2";
 const MyApplications = () => {
     const { user } = useAuth();
     const [jobs, setJobs] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     // Fetch user's applications
     useEffect(() => {
         if (user?.email) {
+            setLoading(true);
             fetch(`http://localhost:3000/job-application?email=${user.email}`)
                 .then((res) => res.json())
-                .then((data) => setJobs(data))
-                .catch((err) => console.error("Failed to fetch jobs:", err));
+                .then((data) => {
+                    setJobs(data);
+                    setLoading(false);
+                })
+                .catch((err) => {
+                    console.error("Failed to fetch jobs:", err);
+                    setLoading(false);
+                });
         }
     }, [user?.email]);
 
-    // Delete application with SweetAlert
+    // Delete application
     const handleDelete = async (id) => {
         const result = await Swal.fire({
             title: "Are you sure?",
@@ -70,35 +78,62 @@ const MyApplications = () => {
             </h2>
 
             <div className="overflow-x-auto">
-                <table className="table w-full border border-gray-200 rounded-lg">
+                <table className="table w-full border border-gray-200 rounded-lg shadow-sm">
                     <thead className="bg-cyan-50">
                         <tr>
                             <th></th>
-                            <th>Name</th>
-                            <th>Job</th>
+                            <th>Company</th>
+                            <th>Job Type</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {jobs.length > 0 ? (
+                        {loading ? (
+                            <tr>
+                                <td colSpan="5" className="text-center py-6 text-gray-500">
+                                    Loading...
+                                </td>
+                            </tr>
+                        ) : jobs.length > 0 ? (
                             jobs.map((job, index) => (
                                 <tr key={job._id || index} className="hover:bg-gray-50">
                                     <th>{index + 1}</th>
-                                    <td>{job.name}</td>
-                                    <td>{job.company}</td>
+
+                                    {/* Company with Logo */}
+                                    <td className="flex items-center gap-3 py-2">
+                                        {job.logo ? (
+                                            <img
+                                                src={job.logo}
+                                                alt={job.company}
+                                                className="w-12 h-12 rounded-full object-cover"
+                                            />
+                                        ) : (
+                                            <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-sm">
+                                                N/A
+                                            </div>
+                                        )}
+                                        <span className="font-medium">{job.company}</span>
+                                    </td>
+
+                                    {/* Job Type */}
+                                    <td>{job.jobType || "N/A"}</td>
+
+                                    {/* Status Badge */}
                                     <td>
                                         <span
                                             className={`badge ${job.status === "Approved"
-                                                ? "badge-success"
-                                                : job.status === "Rejected"
-                                                    ? "badge-error"
-                                                    : "badge-warning"
+                                                    ? "badge-success"
+                                                    : job.status === "Rejected"
+                                                        ? "badge-error"
+                                                        : "badge-warning"
                                                 } badge-sm`}
                                         >
                                             {job.status || "Pending"}
                                         </span>
                                     </td>
+
+                                    {/* Delete Button */}
                                     <td>
                                         <button
                                             onClick={() => handleDelete(job._id)}

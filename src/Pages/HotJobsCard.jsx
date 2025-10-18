@@ -18,12 +18,15 @@ const HotJobsCard = ({ job }) => {
         deadline
     } = job;
 
-    //  Handle logo display 
-    const logoSrc = logo?.startsWith("http")
-        ? logo
-        : logo
-            ? `http://localhost:3000/${logo}`
-            : "https://via.placeholder.com/64?text=Logo";
+    // Handle logo display safely
+    const logoSrc = (() => {
+        if (logo) {
+            if (logo.startsWith("http") || logo.startsWith("https")) return logo;
+            return `http://localhost:3000/${logo}`;
+        }
+        // Fallback placeholder in public folder
+        return "/logo-placeholder.png";
+    })();
 
     return (
         <motion.div
@@ -38,12 +41,16 @@ const HotJobsCard = ({ job }) => {
                         src={logoSrc}
                         alt={company}
                         className="w-16 h-16 object-contain rounded-xl border border-gray-200 p-2 bg-white"
+                        onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = "/logo-placeholder.png";
+                        }}
                     />
                 </figure>
                 <div>
                     <h2 className="text-xl font-semibold text-gray-800">{company}</h2>
                     <p className="flex items-center gap-2 text-gray-500 text-sm mt-1">
-                        <FaMapLocationDot className="text-cyan-600" /> {location}
+                        <FaMapLocationDot className="text-cyan-600" /> {location || "Unknown"}
                     </p>
                 </div>
             </div>
@@ -81,7 +88,6 @@ const HotJobsCard = ({ job }) => {
                 {/* Footer */}
                 <div className="mt-auto flex flex-col sm:flex-row justify-between items-center gap-3 pt-4 border-t border-gray-100">
                     <div className="flex flex-col items-start text-sm sm:text-base font-medium text-gray-700">
-                        {/*  Deadline above salary */}
                         {deadline && (
                             <p className="flex items-center gap-1 text-gray-600">
                                 <FaRegCalendarAlt className="text-cyan-600 text-base" />
