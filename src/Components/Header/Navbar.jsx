@@ -69,7 +69,7 @@ const Navbar = () => {
 
     return (
         <div className="bg-white shadow-md sticky top-0 z-50">
-            <div className="navbar max-w-6xl mx-auto px-4 py-2">
+            <div className="navbar max-w-8xl mx-auto px-4 py-2">
                 {/*  Left: Brand  */}
                 <div className="navbar-start">
                     <Link
