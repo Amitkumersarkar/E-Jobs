@@ -77,7 +77,7 @@ const MyApplications = () => {
                 My Applications ({jobs.length})
             </h2>
 
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto ">
                 <table className="table w-full border border-gray-200 rounded-lg shadow-sm">
                     <thead className="bg-cyan-50">
                         <tr>
@@ -123,10 +123,10 @@ const MyApplications = () => {
                                     <td>
                                         <span
                                             className={`badge ${job.status === "Approved"
-                                                    ? "badge-success"
-                                                    : job.status === "Rejected"
-                                                        ? "badge-error"
-                                                        : "badge-warning"
+                                                ? "badge-success"
+                                                : job.status === "Rejected"
+                                                    ? "badge-error"
+                                                    : "badge-warning"
                                                 } badge-sm`}
                                         >
                                             {job.status || "Pending"}

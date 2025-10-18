@@ -93,7 +93,8 @@ const router = createBrowserRouter([
       {
         path: '/viewApplications/:job_id',
         element: <PrivateRoute><ViewApplications></ViewApplications></PrivateRoute>
-      }
+      },
+
     ]
   },
 ])
