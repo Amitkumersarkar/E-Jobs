@@ -20,6 +20,7 @@ import Privacy from './Pages/PrivacyPolicy/Privacy'
 import Cookie from './Pages/CookiePolicy/Cookie'
 import Statistics from './Pages/StatisticsPage/Statistics'
 import HotJobs from './Pages/HotJobs'
+import MyPostedJobs from './Pages/MyPostedJobs/MyPostedJobs'
 
 const router = createBrowserRouter([
   {
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
       {
         path: '/statistic',
         element: <PrivateRoute><Statistics></Statistics></PrivateRoute>
+      },
+      {
+        path: '/postedJobs',
+        element: <PrivateRoute><MyPostedJobs></MyPostedJobs></PrivateRoute>
       }
     ]
   },

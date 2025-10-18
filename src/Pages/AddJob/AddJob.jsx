@@ -46,7 +46,7 @@ const AddJob = () => {
                 setShowSuccess(true);
                 setTimeout(() => {
                     setShowSuccess(false);
-                    navigate("/hot-jobs");
+                    navigate("/postedJobs");
                 }, 1500);
             }
 
