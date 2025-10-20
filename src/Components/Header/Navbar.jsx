@@ -78,7 +78,7 @@ const Navbar = () => {
     );
 
     return (
-        <div className="bg-white shadow-md sticky top-0 z-50">
+        <div className="sticky top-0 z-50 bg-white/50 dark:bg-gray-300/50 backdrop-blur-lg shadow-sm">
             <div className="navbar max-w-7xl mx-auto px-4 py-2">
                 {/*  Left: Brand  */}
                 <div className="navbar-start">
@@ -86,7 +86,7 @@ const Navbar = () => {
                         to="/"
                         className="text-2xl font-bold text-cyan-600 tracking-wide hover:text-cyan-700 transition"
                     >
-                        <img src={logo} alt="Youth Logo"
+                        <img src={logo} alt="company logo"
                             className="h-10 sm:h-12 object-contain" />
 
                     </Link>
