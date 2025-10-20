@@ -4,19 +4,17 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import AuthContext from "../Context/AuthContext";
+import { FcGoogle } from "react-icons/fc";
 
 const SignIn = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
-    // const navigate = useNavigate();
-
-    const { signIn } = useContext(AuthContext);
+    const { signIn, signInWithGoogle } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
 
-    console.log('in signIn page', location)
-    const from = location.state || '/';
+    const from = location.state || "/";
 
     const handleSignIn = (e) => {
         e.preventDefault();
@@ -25,28 +23,34 @@ const SignIn = () => {
         const password = form.password.value;
 
         signIn(email, password)
-            .then((result) => {
-                console.log("Signed in:", result.user);
-                navigate(from);
+            .then(() => {
                 setSuccess("Login successful!");
                 setError("");
                 form.reset();
-
-                setTimeout(() => {
-                    navigate("/");
-                }, 1500);
+                navigate(from);
             })
-            .catch((err) => {
-                console.error(err.message);
+            .catch(() => {
                 setError("Invalid email or password!");
                 setSuccess("");
+            });
+    };
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then(() => {
+                navigate(from);
+                setSuccess("Signed in with Google!");
+                setError("");
+            })
+            .catch((err) => {
+                console.error(err);
+                setError("Google sign-in failed!");
             });
     };
 
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row items-center gap-10 w-full max-w-5xl">
-                {/* Left Side */}
                 <div className="flex flex-col items-center text-center w-full lg:w-1/2">
                     <h1 className="text-3xl md:text-4xl font-bold mb-4">
                         Welcome Back!
@@ -54,7 +58,6 @@ const SignIn = () => {
                     <Lottie animationData={loginAnimationData} className="w-80 h-80" />
                 </div>
 
-                {/* Right Side Form */}
                 <div className="card bg-base-100 w-full sm:w-3/4 md:w-2/3 lg:w-1/2 shadow-2xl">
                     <form onSubmit={handleSignIn} className="card-body">
                         <fieldset className="space-y-3">
@@ -81,18 +84,28 @@ const SignIn = () => {
                                     onClick={() => setShowPassword(!showPassword)}
                                     className="absolute inset-y-0 right-3 flex items-center text-gray-500"
                                 >
-                                    {showPassword ? (
-                                        <FiEyeOff className="text-xl" />
-                                    ) : (
-                                        <FiEye className="text-xl" />
-                                    )}
+                                    {showPassword ? <FiEyeOff /> : <FiEye />}
                                 </button>
                             </div>
 
                             {error && <p className="text-red-500 text-sm">{error}</p>}
                             {success && <p className="text-green-500 text-sm">{success}</p>}
-                            <div><a className="link link-hover"><NavLink to='error'>Forgot password?</NavLink></a></div>
+
+                            <div>
+                                <a className="link link-hover">
+                                    <NavLink to="error">Forgot password?</NavLink>
+                                </a>
+                            </div>
                             <button className="btn btn-primary w-full mt-4">Sign In</button>
+
+                            <div className="divider">OR</div>
+                            <button
+                                type="button"
+                                onClick={handleGoogleSignIn}
+                                className="btn btn-outline btn-accent w-full flex items-center gap-2"
+                            >
+                                <FcGoogle className="text-2xl" /> Sign in with Google
+                            </button>
                         </fieldset>
 
                         <p className="text-center mt-5">
