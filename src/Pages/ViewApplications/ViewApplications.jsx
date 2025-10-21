@@ -8,7 +8,7 @@ const ViewApplications = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/job-applications/jobs/${job_id}`)
+        fetch(`https://job-portal-server-bay-zeta.vercel.app/job-applications/jobs/${job_id}`)
             .then((res) => res.json())
             .then((data) => {
                 setApplications(Array.isArray(data) ? data : []);

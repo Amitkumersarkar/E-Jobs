@@ -34,7 +34,7 @@ const JobApply = () => {
         };
 
         try {
-            const res = await fetch("http://localhost:3000/job-applications", {
+            const res = await fetch("https://job-portal-server-bay-zeta.vercel.app/job-applications", {
                 method: "POST",
                 headers: {
                     "content-type": "application/json",

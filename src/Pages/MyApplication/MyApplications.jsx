@@ -11,7 +11,7 @@ const MyApplications = () => {
     useEffect(() => {
         if (user?.email) {
             setLoading(true);
-            fetch(`http://localhost:3000/job-application?email=${user.email}`)
+            fetch(`https://job-portal-server-bay-zeta.vercel.app/job-application?email=${user.email}`)
                 .then((res) => res.json())
                 .then((data) => {
                     setJobs(data);
@@ -38,7 +38,7 @@ const MyApplications = () => {
 
         if (result.isConfirmed) {
             try {
-                const res = await fetch(`http://localhost:3000/job-applications/${id}`, {
+                const res = await fetch(`https://job-portal-server-bay-zeta.vercel.app/job-applications/${id}`, {
                     method: "DELETE",
                 });
                 const data = await res.json();

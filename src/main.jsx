@@ -22,6 +22,7 @@ import Statistics from './Pages/StatisticsPage/Statistics'
 import HotJobs from './Pages/HotJobs'
 import MyPostedJobs from './Pages/MyPostedJobs/MyPostedJobs'
 import ViewApplications from './Pages/ViewApplications/ViewApplications'
+// const API_URL = import.meta.env.VITE_API_URL;
 
 const router = createBrowserRouter([
   {
@@ -44,7 +45,9 @@ const router = createBrowserRouter([
       {
         path: '/jobs/:id',
         element: <PrivateRoute><JobDetails></JobDetails></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:3000/jobs/${params.id}`)
+        // loader: ({ params }) => fetch(`${API_URL}/jobs/${params.id}`)
+
+        loader: ({ params }) => fetch(`https://job-portal-server-bay-zeta.vercel.app/jobs/${params.id}`)
       },
       {
         path: '/hot-jobs',

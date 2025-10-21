@@ -33,7 +33,7 @@ const AddJob = () => {
         console.log("Job submitted:", jobData);
 
         try {
-            const res = await fetch("http://localhost:3000/jobs", {
+            const res = await fetch("https://job-portal-server-bay-zeta.vercel.app/jobs", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(jobData),

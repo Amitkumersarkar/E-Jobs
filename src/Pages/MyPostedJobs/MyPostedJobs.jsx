@@ -10,7 +10,7 @@ const MyPostedJobs = () => {
     // Fetch jobs
     const fetchJobs = () => {
         if (!user?.email) return;
-        fetch(`http://localhost:3000/jobs?email=${user.email}`)
+        fetch(`https://job-portal-server-bay-zeta.vercel.app/jobs?email=${user.email}`)
             .then((res) => res.json())
             .then((data) => {
                 setJobs(data);
@@ -50,7 +50,7 @@ const MyPostedJobs = () => {
 
         if (confirm.isConfirmed) {
             try {
-                const res = await fetch(`http://localhost:3000/jobs/${jobId}`, {
+                const res = await fetch(`https://job-portal-server-bay-zeta.vercel.app/jobs/${jobId}`, {
                     method: "DELETE",
                 });
                 const data = await res.json();

@@ -22,7 +22,7 @@ const HotJobsCard = ({ job }) => {
     const logoSrc = (() => {
         if (logo) {
             if (logo.startsWith("http") || logo.startsWith("https")) return logo;
-            return `http://localhost:3000/${logo}`;
+            return `https://job-portal-server-bay-zeta.vercel.app/${logo}`;
         }
         // Fallback placeholder in public folder
         return "/logo-placeholder.png";
