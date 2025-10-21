@@ -4,7 +4,7 @@ A modern **MERN Stack Job Portal** that connects **job seekers** and **employers
 Users can browse and apply for jobs, while recruiters can post and manage openings — all with secure Firebase authentication and a sleek, responsive UI.
 
 🌐 **Live Demo:** [https://jobs-portal-9cc03.web.app/](https://jobs-portal-9cc03.web.app/)
-
+🌐 Sever Link : (https://job-portal-server-bay-zeta.vercel.app/)
 ---
 
 ## 🚀 Features  
