@@ -5,7 +5,7 @@ Users can browse and apply for jobs, while recruiters can post and manage openin
 
 🌐 **Live Demo:** [https://jobs-portal-9cc03.web.app/](https://jobs-portal-9cc03.web.app/)
 ---
-🌐 Sever Link : (https://job-portal-server-bay-zeta.vercel.app/)
+🌐 Sever Link : https://job-portal-server-bay-zeta.vercel.app/
 
 ## 🚀 Features  
 
